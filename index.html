@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Agenda de Tarefas</title>
+    <link rel="icon" type="image/png" href="favicon.png">
+    <meta name="theme-color" content="#020203">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=JetBrains+Mono:wght@400;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="viewport-effects">
+        <div class="glow-orb orb-pink"></div>
+        <div class="glow-orb orb-dark"></div>
+        <div class="grid-overlay"></div>
+    </div>
+
+    <div id="toast-container" class="toast-wrapper"></div>
+
+    <section id="auth-container" class="auth-wrapper">
+        <div class="auth-card premium-glass">
+            <header class="auth-card__header">
+                <div class="system-status">
+                    <span class="status-pulse"></span>
+                    <span class="status-text">AGENDA DE TAREFAS PESSOAL</span>
+                </div>
+                <h1 class="brand-title">Matheus<span>Macedo</span></h1>
+                <p class="auth-description">Agenda De Tarefas Pessol,Acesso restrito.</p>
+            </header>
+
+            <form id="login-form" class="cyber-form" onsubmit="event.preventDefault()">
+                <div class="field-container">
+                    <div class="input-group">
+                        <input type="email" id="email" class="cyber-input" placeholder=" " required>
+                        <label class="floating-label">E-MAIL DEVELOPER</label>
+                        <span class="input-icon">USUARIO</span>
+                    </div>
+                </div>
+
+                <div class="field-container">
+                    <div class="input-group">
+                        <input type="password" id="password" class="cyber-input" placeholder=" " required>
+                        <label class="floating-label">SENHA DEVELOPER</label>
+                        <span class="input-icon">SENHA</span>
+                    </div>
+                </div>
+
+                <div class="auth-actions">
+                    <button type="button" onclick="login()" id="login-btn" class="btn-primary">
+                        <span class="btn-text">Bem Vindo A Sua Agenda De Tarefas</span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <section id="app-container" class="dashboard-wrapper" style="display: none;">
+        <nav class="main-nav premium-glass">
+            <div class="nav-container">
+                <div class="nav-brand">
+                    <div class="nav-logo-box">M</div>
+                    <div class="nav-title-box">
+                        <span class="nav-title">Matheus<span>Macedo</span></span>
+                        <span class="user-role">Agenda De Tarefas</span>
+                    </div>
+                </div>
+                <button onclick="logout()" class="btn-logout">SAIR</button>
+            </div>
+        </nav>
+
+        <main class="dashboard-content">
+            <section class="panel-entry premium-glass animate-slide-up">
+                <div class="panel-header">
+                    <span class="accent-bar"></span>
+                    <h2 class="panel-title">NOVA TAREFA</h2>
+                </div>
+
+                <div class="entry-form">
+                    <div class="entry-row">
+                        <div class="entry-group span-2">
+                            <label>DISCIPLINA</label>
+                            <input type="text" id="materia" class="cyber-input-flat" placeholder="Ex: Quimica 1">
+                        </div>
+                        <div class="entry-group span-2">
+                            <label>CAPÍTULO</label>
+                            <input type="text" id="capitulo" class="cyber-input-flat" placeholder="Ex: cap 1">
+                        </div>
+                    </div>
+
+                    <div class="entry-row">
+                        <div class="entry-group">
+                            <label>data de inicio</label>
+                            <input type="date" id="data_inicio" class="cyber-input-flat">
+                        </div>
+                        <div class="entry-group">
+                            <label>data de fim</label>
+                            <input type="date" id="data_fim" class="cyber-input-flat">
+                        </div>
+                        <div class="entry-group span-2">
+                            <label>ORIGEM</label>
+                            <select id="origem" class="cyber-input-flat">
+                                <option value="sas">SAS_PLATFORM</option>
+                                <option value="caderno">LOCAL_NOTES</option>
+                                <option value="video">HUB_VIDEO_TRAINING</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="entry-actions">
+                        <button onclick="addTask()" class="btn-primary full-mobile">
+                            <span class="btn-text">ADICIONAR TAREFA</span>
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <div class="data-grid">
+                <div class="grid-column">
+                    <div class="column-header">
+                        <div class="header-title-flex">
+                            <div class="status-indicator live"></div>
+                            <h3>EM ANDAMENTO</h3>
+                        </div>
+                        <span id="count-active" class="counter">0</span>
+                    </div>
+                    <div id="list-pending" class="task-list"></div>
+                </div>
+
+                <div class="grid-column">
+                    <div class="column-header">
+                        <div class="header-title-flex">
+                            <div class="status-indicator archive"></div>
+                            <h3>HISTÓRICO</h3>
+                        </div>
+                        <span id="count-done" class="counter">0</span>
+                    </div>
+                    <div id="list-completed" class="task-list list-archived"></div>
+                </div>
+            </div>
+        </main>
+        
+        <div style="height: 100px;"></div>
+    </section>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="app.js"></script>
+</body>
+</html>
